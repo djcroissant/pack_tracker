@@ -1,0 +1,33 @@
+<%= form_for(@packed_item) do |f| %>
+  <% if @packed_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@packed_item.errors.count, "error") %> prohibited this packed_item from being saved:</h2>
+
+      <ul>
+      <% @packed_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br>
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :group_item %><br>
+    <%= f.check_box :group_item %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

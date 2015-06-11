@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Packed Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Weight</th>
+      <th>Group item</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @packed_items.each do |packed_item| %>
+      <tr>
+        <td><%= packed_item.title %></td>
+        <td><%= packed_item.description %></td>
+        <td><%= packed_item.weight %></td>
+        <td><%= packed_item.group_item %></td>
+        <td><%= link_to 'Show', packed_item %></td>
+        <td><%= link_to 'Edit', edit_packed_item_path(packed_item) %></td>
+        <td><%= link_to 'Destroy', packed_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Packed item', new_packed_item_path %>
