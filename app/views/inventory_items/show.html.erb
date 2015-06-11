@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @inventory_item.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @inventory_item.description %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @inventory_item.weight %>
+</p>
+
+<p>
+  <strong>Group item:</strong>
+  <%= @inventory_item.group_item %>
+</p>
+
+<%= link_to 'Edit', edit_inventory_item_path(@inventory_item) %> |
+<%= link_to 'Back', inventory_items_path %>
