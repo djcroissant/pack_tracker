@@ -14,10 +14,13 @@
 ActiveRecord::Schema.define(version: 20150611012435) do
 
   create_table "climbers", force: :cascade do |t|
+    t.integer  "expedition_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "climbers", ["expedition_id"], name: "index_climbers_on_expedition_id"
 
   create_table "expeditions", force: :cascade do |t|
     t.string   "title"
@@ -36,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150611012435) do
   end
 
   create_table "packed_items", force: :cascade do |t|
+    t.integer  "climber_id"
     t.string   "title"
     t.text     "description"
     t.integer  "weight"
@@ -43,5 +47,7 @@ ActiveRecord::Schema.define(version: 20150611012435) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "packed_items", ["climber_id"], name: "index_packed_items_on_climber_id"
 
 end
