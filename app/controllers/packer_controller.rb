@@ -4,4 +4,9 @@ class PackerController < ApplicationController
     @climbers=Climber.all
   end
 
+  def pack_it
+    @params = params
+    #redirect_to packer_allocate_path , alert: "#{params}"
+  end
+
 end

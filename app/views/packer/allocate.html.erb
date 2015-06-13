@@ -1,6 +1,9 @@
+<p>Here are the params:</p>
+<p><%= params %></p>
 
 <h1>Get Packing!</h1>
 
+<%= form_tag do %>
 <table>
   <thead>
     <tr>
@@ -22,7 +25,7 @@
         <td><%= inventory_item.title %></td>
         <td><%= inventory_item.description %></td>
         <td><%= inventory_item.weight %></td>
-        <td><%= radio_button_tag(row_count.to_s.to_sym, "None") %></td>
+        <td><%= radio_button_tag(row_count.to_s.to_sym, "Not Packed") %></td>
         <% @climbers.each do |c| %>
           <td><%= radio_button_tag(row_count.to_s.to_sym, "#{c.name}") %></td>
         <% end %>
@@ -31,3 +34,6 @@
     <% end %>
   </tbody>
 </table>
+<%= submit_tag("Pack It") %>
+
+<% end %>
