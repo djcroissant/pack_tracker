@@ -1,2 +1,5 @@
+<% PackedItem.all.each do |p| %>
+<p><%= p.title %></p>
+<% end %>
 <p><%= @params %></p>
 <%= link_to  "allocate", packer_allocate_path, method: :get %>
