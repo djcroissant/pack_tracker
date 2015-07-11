@@ -1,4 +1,4 @@
 class Expedition < ActiveRecord::Base
-  has_many :climbers
-  has_many :packed_items, through: :climbers
+  has_and_belongs_to_many :climbers
+  has_many :packed_items
 end

@@ -1,10 +1,12 @@
 class PackerController < ApplicationController
   def allocate
-    @inventory_items=InventoryItem.all
-    @climbers=Climber.all
+    @expedition = Expedition.first
+    @climber = Climber.first
+    @inventory_items = @climber.InventoryItem.all
   end
 
   def pack_it
+    @packing_list
     @params = params.select {|inventory_item_id,climber_name| inventory_item_id =~ /^\d+/}
     @params.reject! {|inventory_item_id,climber_name| climber_name == "Not Packed"}
     @params.each do |inventory_item_id,climber_name|

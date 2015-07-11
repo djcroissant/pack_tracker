@@ -1,4 +1,8 @@
-<h1>Get Packing!</h1>
+<h1><%= @expedition.title.titleize %></h1>
+
+<h2><%= "Pack for #{@expedition.days} Days" %></h2>
+
+<%= form_for @packing_list, url: {action}
 
 <%= form_tag do %>
 <table>
