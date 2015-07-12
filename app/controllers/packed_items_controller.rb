@@ -69,6 +69,6 @@ class PackedItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def packed_item_params
-      params.require(:packed_item).permit(:title, :description, :weight, :group_item)
+      params.require(:packed_item).permit(:title, :description, :weight)
     end
 end

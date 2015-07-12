@@ -1,3 +1,6 @@
+#This controller just takes Climber.first.  After login is enabled, this should
+#be updated
+
 class PackerController < ApplicationController
   def allocate
     @expedition = Expedition.first
@@ -6,20 +9,24 @@ class PackerController < ApplicationController
   end
 
   def pack_it
-    @packing_list
-    @params = params.select {|inventory_item_id,climber_name| inventory_item_id =~ /^\d+/}
-    @params.reject! {|inventory_item_id,climber_name| climber_name == "Not Packed"}
-    @params.each do |inventory_item_id,climber_name|
-      ii = InventoryItem.find(inventory_item_id)
-      PackedItem.create(
-        climber_id: (Climber.find_by name: climber_name).id,
-        title: ii.title,
-        description: ii.description,
-        weight: ii.weight,
-        group_item: ii.group_item
-        )
+    @expedition = Expedition.first
+    @climber = Climber.first
+    @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map {|i| i.to_i}
+
+    items = InventoryItem.where(climber_id: @climber.id)
+    items.each do |item|
+      if @packed_ids.include?(item.id)
+        if item.expeditions.where(id: @expedition.id).empty?
+          item.expeditions << @expedition
+        end
+      else
+        if item.expeditions.where(id: @expedition.id).present?
+          item.expeditions.delete(@expedition)
+        end
       end
-    #redirect_to packer_allocate_path , alert: "#{params}"
+    end
   end
+
+
 
 end

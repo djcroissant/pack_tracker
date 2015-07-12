@@ -4,7 +4,6 @@ class CreateInventoryItems < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.integer :weight
-      t.boolean :group_item
 
       t.timestamps null: false
     end

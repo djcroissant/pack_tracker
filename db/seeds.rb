@@ -40,18 +40,3 @@ inventory_items = InventoryItem.create([
   { title:"Hiking Poles", description:"Lindsay's", weight:1000, climber_id: 3 },
   { title:"Hiking Poles", description:"Derek's", weight:1100, climber_id: 3 }
   ])
-
-packed_items = PackedItem.create([
-  InventoryItem.where(id: 1).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: [1,2]) }),
-  InventoryItem.where(id: 2).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: [1,2]) }),
-  InventoryItem.where(id: 3).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: true, expeditions: Expedition.where(id: [1,2]) }),
-  InventoryItem.where(id: 4).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: true, expeditions: Expedition.where(id: [1,2]) }),
-  InventoryItem.where(id: 5).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: true, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 6).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 12).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 13).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 14).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 20).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 21).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) }),
-  InventoryItem.where(id: 22).select("title, description, weight, climber_id").last.attributes.merge!({ group_item: false, expeditions: Expedition.where(id: 1) })
-  ])

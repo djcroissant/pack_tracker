@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150711232933) do
+ActiveRecord::Schema.define(version: 20150712030531) do
 
   create_table "climbers", force: :cascade do |t|
     t.string   "name"
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 20150711232933) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "expeditions_packed_items", id: false, force: :cascade do |t|
+  create_table "expeditions_inventory_items", id: false, force: :cascade do |t|
     t.integer "expedition_id"
-    t.integer "packed_item_id"
+    t.integer "inventory_item_id"
   end
 
-  add_index "expeditions_packed_items", ["expedition_id"], name: "index_expeditions_packed_items_on_expedition_id"
-  add_index "expeditions_packed_items", ["packed_item_id"], name: "index_expeditions_packed_items_on_packed_item_id"
+  add_index "expeditions_inventory_items", ["expedition_id"], name: "index_expeditions_inventory_items_on_expedition_id"
+  add_index "expeditions_inventory_items", ["inventory_item_id"], name: "index_expeditions_inventory_items_on_inventory_item_id"
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "title"
@@ -52,17 +52,5 @@ ActiveRecord::Schema.define(version: 20150711232933) do
   end
 
   add_index "inventory_items", ["climber_id"], name: "index_inventory_items_on_climber_id"
-
-  create_table "packed_items", force: :cascade do |t|
-    t.integer  "climber_id"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "weight"
-    t.boolean  "group_item"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "packed_items", ["climber_id"], name: "index_packed_items_on_climber_id"
 
 end

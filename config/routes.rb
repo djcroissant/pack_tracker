@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
 
+  get 'packer/practice' => 'packer#practice', as: 'packer_practice'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
