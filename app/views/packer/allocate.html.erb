@@ -1,30 +1,26 @@
-<h1>Get Packing!</h1>
+<h1><%= @expedition.title.titleize %></h1>
+
+<h2><%= "Pack for #{@expedition.days} Days" %></h2>
 
 <%= form_tag do %>
 <table>
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Packed</th>
+      <th>Weight (lb)</th>
+      <th>Equipment</th>
       <th>Description</th>
-      <th>Weight</th>
-      <th>Not Packed</th>
-      <% @climbers.each do |c| %>
-        <th><%= c.name %></th>
-      <% end %>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @inventory_items.each do |inventory_item| %>
       <tr>
+        <td><%= check_box_tag(inventory_item.id.to_s.to_sym, "Packed",
+        inventory_item.expeditions.where(id: @expedition.id).present? ? true : false) %></td>
+        <td><%= inventory_item.weight %></td>
         <td><%= inventory_item.title %></td>
         <td><%= inventory_item.description %></td>
-        <td><%= inventory_item.weight %></td>
-        <td><%= radio_button_tag(inventory_item.id.to_s.to_sym, "Not Packed", :checked) %></td>
-        <% @climbers.each do |c| %>
-          <td><%= radio_button_tag(inventory_item.id.to_s.to_sym, "#{c.name}") %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -32,5 +28,6 @@
 <%= submit_tag("Pack It") %>
 
 <% end %>
+
 
 <p><%= link_to "Inventory", root_path %>

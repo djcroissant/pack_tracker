@@ -11,16 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611012435) do
+ActiveRecord::Schema.define(version: 20150712030531) do
 
   create_table "climbers", force: :cascade do |t|
-    t.integer  "expedition_id"
     t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "climbers", ["expedition_id"], name: "index_climbers_on_expedition_id"
+  create_table "climbers_expeditions", id: false, force: :cascade do |t|
+    t.integer "climber_id"
+    t.integer "expedition_id"
+  end
+
+  add_index "climbers_expeditions", ["climber_id"], name: "index_climbers_expeditions_on_climber_id"
+  add_index "climbers_expeditions", ["expedition_id"], name: "index_climbers_expeditions_on_expedition_id"
 
   create_table "expeditions", force: :cascade do |t|
     t.string   "title"
@@ -29,25 +34,23 @@ ActiveRecord::Schema.define(version: 20150611012435) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "expeditions_inventory_items", id: false, force: :cascade do |t|
+    t.integer "expedition_id"
+    t.integer "inventory_item_id"
+  end
+
+  add_index "expeditions_inventory_items", ["expedition_id"], name: "index_expeditions_inventory_items_on_expedition_id"
+  add_index "expeditions_inventory_items", ["inventory_item_id"], name: "index_expeditions_inventory_items_on_inventory_item_id"
+
   create_table "inventory_items", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "weight"
-    t.boolean  "group_item"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "packed_items", force: :cascade do |t|
     t.integer  "climber_id"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "weight"
-    t.boolean  "group_item"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
-  add_index "packed_items", ["climber_id"], name: "index_packed_items_on_climber_id"
+  add_index "inventory_items", ["climber_id"], name: "index_inventory_items_on_climber_id"
 
 end

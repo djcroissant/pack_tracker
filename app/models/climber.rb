@@ -1,4 +1,5 @@
 class Climber < ActiveRecord::Base
-  belongs_to :expedition
+  has_and_belongs_to_many :expeditions
   has_many :packed_items
+  has_many :inventory_items
 end

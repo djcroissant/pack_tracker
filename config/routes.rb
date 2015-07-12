@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
 
+  get 'packer/practice' => 'packer#practice', as: 'packer_practice'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'inventory_items#index'
+   root 'packer#welcome'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

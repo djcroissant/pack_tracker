@@ -1,7 +1,16 @@
 This view needs some work.  It is just listing out all the items that are
 in anybodys pack.  It would need to identify which items belong to which pack.
 
-<% PackedItem.all.each do |p| %>
-<p><%= p.title %></p>
+
+<p><%= @params %></p>
+<p><%= "expedition= #{@expedition.title}" %></p>
+
+<% items = InventoryItem.where(climber_id: @climber.id) %>
+
+<% items.each do |i| %>
+  <% if i.expeditions.where(id: @expedition.id).present? %>
+    <p><%= i.title %></p>
+  <% end %>
 <% end %>
+
 <%= link_to  "allocate", packer_allocate_path, method: :get %>
