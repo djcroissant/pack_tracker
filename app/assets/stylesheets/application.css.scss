@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+/* Blue */
+ $bgDefault      : #2769D9;
+ $bgHighlight    : #1F54AD;
+ $colDefault     : #ecf0f1;
+ $colHover       : #7da5e8;
+
+ /* Red */
+ /*$bgDefault      : #e74c3c;
+ $bgHighlight    : #c0392b;
+ $colDefault     : #ecf0f1;
+ $colHover       : #ffbbbc; */
+ /* Green * /
+ $bgDefault      : #2ecc71;
+ $bgHighlight    : #27ae60;
+ $colDefault     : #ecf0f1;
+ $colHover       : #d1ffed; /*/
+ /* Purple * /
+ $bgDefault      : #9b59b6;
+ $bgHighlight    : #8e44ad;
+ $colDefault     : #ecf0f1;
+ $colHover       : #ecdbff; /*/
+ /* Orange * /
+ $bgDefault      : #e67e22;
+ $bgHighlight    : #d35400;
+ $colDefault     : #ecf0f1;
+ $colHover       : #ffe6d1; /*/
+
+
+ /* --- Style --- */
+ .navbar-default {
+     background-color: $bgDefault;
+     border-color: $bgHighlight;
+     .navbar-brand {
+         color: $colDefault;
+         &:hover, &:focus {
+             color: $colHover; }}
+     .navbar-nav {
+         > li {
+             > a {
+                 color: $colDefault;
+                 &:hover, &:focus {
+                     color: $colHover;   }}}
+         .active {
+             > a, > a:hover, > a:focus {
+                 color: $colHover;
+                 background-color: $bgHighlight; }}
+         .open {
+             > a, > a:hover, > a:focus {
+                 color: $colHover;
+                 background-color: $bgHighlight;
+                 .caret {
+                     border-top-color: $colHover;
+                     border-bottom-color: $colHover; }}}
+         > .dropdown {
+             > a {
+                 .caret {
+                     border-top-color: $colDefault;
+                     border-bottom-color: $colDefault; }
+                 &:hover, &:focus {
+                     .caret {
+                         border-top-color: $colHover;
+                         border-bottom-color: $colHover; }}}}}
+     .navbar-toggle {
+         border-color: $bgHighlight;
+         &:hover, &:focus {
+             background-color: $bgHighlight; }
+         .icon-bar {
+             background-color: $colDefault; }}}
+ @media (max-width: 767px) {
+     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+         color: $colDefault;
+         &:hover, &:focus {
+             color: $colHover;
+             background-color: $bgHighlight; }}
+ }
