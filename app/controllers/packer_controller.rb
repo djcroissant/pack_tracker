@@ -2,7 +2,7 @@ class PackerController < ApplicationController
   def allocate
     @expedition = Expedition.first
     @climber = Climber.first
-    @inventory_items = @climber.InventoryItem.all
+    @inventory_items = @climber.inventory_items
   end
 
   def pack_it

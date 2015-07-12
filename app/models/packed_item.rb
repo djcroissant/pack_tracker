@@ -1,4 +1,4 @@
 class PackedItem < ActiveRecord::Base
-  belongs_to :expedition
+  has_and_belongs_to_many :expeditions
   belongs_to :climber
 end
