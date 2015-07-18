@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
   resources :inventory_items
   resources :packed_items
 
