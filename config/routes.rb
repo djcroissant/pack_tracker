@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  get 'users/new'
+  get "sign_up" => "users#new", :as => "sign_up"
+  resources :users
 
   resources :inventory_items
   resources :packed_items
+
+  get 'login' => 'sessions#new', as: :login
+  post'login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy', as: :logout
 
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'

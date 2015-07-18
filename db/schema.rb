@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20150718161620) do
     t.string   "title"
     t.text     "description"
     t.integer  "weight"
-    t.boolean  "group_item"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "climber_id"
@@ -57,24 +56,11 @@ ActiveRecord::Schema.define(version: 20150718161620) do
 
   add_index "inventory_items", ["climber_id"], name: "index_inventory_items_on_climber_id"
 
-  create_table "packed_items", force: :cascade do |t|
-    t.integer  "climber_id"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "weight"
-    t.boolean  "group_item"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "packed_items", ["climber_id"], name: "index_packed_items_on_climber_id"
-
   create_table "users", force: :cascade do |t|
     t.string   "email"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
