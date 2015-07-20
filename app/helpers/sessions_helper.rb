@@ -11,7 +11,9 @@ module SessionsHelper
   def authentication_required
     unless signed_in?
       store_location
-      redirect_to login_url, notice: "Please sign in"
+      # Not sure if we want/need the notice text at the top each time someone sees the login page
+      # redirect_to login_url, notice: "Please sign in"
+      redirect_to login_url
     end
   end
 

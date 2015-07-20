@@ -1,5 +1,7 @@
 class PackedItemsController < ApplicationController
+  include SessionsHelper
   before_action :set_packed_item, only: [:show, :edit, :update, :destroy]
+  before_action :authentication_required
 
   # GET /packed_items
   # GET /packed_items.json

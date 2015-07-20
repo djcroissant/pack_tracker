@@ -3,6 +3,7 @@
 
 class PackerController < ApplicationController
   include SessionsHelper
+  before_action :authentication_required
 
   def allocate
     @expedition = Expedition.first

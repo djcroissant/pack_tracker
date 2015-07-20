@@ -25,10 +25,10 @@
         <ul class="nav navbar-nav">
           <!-- <li class="active"><a href="#">Login <span class="sr-only">(current)</span></a></li> -->
           <% if !signed_in? %>
-            <% unless request.original_url.include? "login" %>
+            <% unless request.original_url.include? "login" #if on login page, don't list login as option on top bar%>
                <li><a href="/login">Login</a></li>
              <% end %>
-             <% unless request.original_url.include? "sign_up" %>
+             <% unless request.original_url.include? "sign_up" # if on sign_up page, don't list sign up as option on top bar%>
                <li><a href="/sign_up">Sign Up</a></li>
              <% end %>
           <% end %>
