@@ -7,12 +7,13 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new', as: :login
   post'login' => 'sessions#create'
-  get 'packer/logout' => 'sessions#destroy', as: :logout
+  get 'logout' => 'sessions#destroy', as: :logout
 
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
-
   get 'packer/practice' => 'packer#practice', as: 'packer_practice'
+
+  #get 'expeditions' => 'expeditions#index', as: 'expeditions'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

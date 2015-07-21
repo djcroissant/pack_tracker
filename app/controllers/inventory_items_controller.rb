@@ -5,7 +5,10 @@ class InventoryItemsController < ApplicationController
   # GET /inventory_items
   # GET /inventory_items.json
   def index
-    @inventory_items = InventoryItem.all
+    if signed_in?
+      @user = current_user
+      @inventory_items = @user.inventory_items.order("title")
+    end
   end
 
   # GET /inventory_items/1
@@ -26,10 +29,14 @@ class InventoryItemsController < ApplicationController
   # POST /inventory_items.json
   def create
     @inventory_item = InventoryItem.new(inventory_item_params)
+    if signed_in?
+      @user = current_user
+      @inventory_item.user_id = @user.id
+    end
 
     respond_to do |format|
       if @inventory_item.save
-        format.html { redirect_to @inventory_item, notice: 'Inventory item was successfully created.' }
+        format.html { redirect_to inventory_items_url, notice: "#{@inventory_item.title} was added to inventory." }
         format.json { render :show, status: :created, location: @inventory_item }
       else
         format.html { render :new }

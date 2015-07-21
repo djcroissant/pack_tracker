@@ -6,9 +6,12 @@ class PackerController < ApplicationController
   before_action :authentication_required
 
   def allocate
-    @expedition = Expedition.first
-    @user = User.first
-    @inventory_items = @user.inventory_items
+    exp_id = params[:exp_id]
+    if signed_in?
+      @user = current_user
+    end
+    @expedition = Expedition.find_by(id: exp_id)
+    @inventory_items = @expedition.inventory_items
   end
 
   def pack_it

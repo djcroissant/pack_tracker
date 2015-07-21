@@ -3,7 +3,7 @@
 <h2><%= "Pack for #{@expedition.days} Days" %></h2>
 
 <%= form_tag do %>
-<table class="table table-hover table-bordered table-condensed">  
+<table class="table table-hover table-bordered table-condensed">
   <thead>
     <tr>
       <th>Packed</th>
@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% @inventory_items.each do |inventory_item| %>
+    <% @user.inventory_items.each do |inventory_item| %>
       <tr>
         <td><%= check_box_tag(inventory_item.id.to_s.to_sym, "Packed",
         inventory_item.expeditions.where(id: @expedition.id).present? ? true : false) %></td>

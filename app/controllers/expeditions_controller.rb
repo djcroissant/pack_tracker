@@ -4,7 +4,10 @@ class ExpeditionsController < ApplicationController
   before_action :authentication_required
 
   def index
-    @expeditions = Expedition.all
+    if signed_in?
+      @user = current_user
+      @expeditions = @user.expeditions.order("title")
+    end
   end
 
   def show
