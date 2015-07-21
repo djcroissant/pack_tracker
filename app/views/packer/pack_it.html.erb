@@ -5,7 +5,7 @@ in anybodys pack.  It would need to identify which items belong to which pack.
 <p><%= @params %></p>
 <p><%= "expedition= #{@expedition.title}" %></p>
 
-<% items = InventoryItem.where(climber_id: @climber.id) %>
+<% items = InventoryItem.where(user_id: @user.id) %>
 
 <% items.each do |i| %>
   <% if i.expeditions.where(id: @expedition.id).present? %>

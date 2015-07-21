@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :inventory_items
-  resources :packed_items
+  resources :expeditions
 
   get 'login' => 'sessions#new', as: :login
   post'login' => 'sessions#create'

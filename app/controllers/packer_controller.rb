@@ -1,4 +1,4 @@
-#This controller just takes Climber.first.  After login is enabled, this should
+#This controller just takes User.first.  After login is enabled, this should
 #be updated
 
 class PackerController < ApplicationController
@@ -7,16 +7,16 @@ class PackerController < ApplicationController
 
   def allocate
     @expedition = Expedition.first
-    @climber = Climber.first
-    @inventory_items = @climber.inventory_items
+    @user = User.first
+    @inventory_items = @user.inventory_items
   end
 
   def pack_it
     @expedition = Expedition.first
-    @climber = Climber.first
+    @user = User.first
     @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map {|i| i.to_i}
 
-    items = InventoryItem.where(climber_id: @climber.id)
+    items = InventoryItem.where(user_id: @user.id)
     items.each do |item|
       if @packed_ids.include?(item.id)
         if item.expeditions.where(id: @expedition.id).empty?

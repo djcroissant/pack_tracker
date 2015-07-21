@@ -11,24 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718161620) do
-
-  create_table "climbers", force: :cascade do |t|
-    t.integer  "expedition_id"
-    t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "climbers", ["expedition_id"], name: "index_climbers_on_expedition_id"
-
-  create_table "climbers_expeditions", id: false, force: :cascade do |t|
-    t.integer "climber_id"
-    t.integer "expedition_id"
-  end
-
-  add_index "climbers_expeditions", ["climber_id"], name: "index_climbers_expeditions_on_climber_id"
-  add_index "climbers_expeditions", ["expedition_id"], name: "index_climbers_expeditions_on_expedition_id"
+ActiveRecord::Schema.define(version: 20150721022806) do
 
   create_table "expeditions", force: :cascade do |t|
     t.string   "title"
@@ -45,22 +28,31 @@ ActiveRecord::Schema.define(version: 20150718161620) do
   add_index "expeditions_inventory_items", ["expedition_id"], name: "index_expeditions_inventory_items_on_expedition_id"
   add_index "expeditions_inventory_items", ["inventory_item_id"], name: "index_expeditions_inventory_items_on_inventory_item_id"
 
+  create_table "expeditions_users", id: false, force: :cascade do |t|
+    t.integer "expedition_id"
+    t.integer "user_id"
+  end
+
+  add_index "expeditions_users", ["expedition_id"], name: "index_expeditions_users_on_expedition_id"
+  add_index "expeditions_users", ["user_id"], name: "index_expeditions_users_on_user_id"
+
   create_table "inventory_items", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "weight"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "climber_id"
+    t.integer  "user_id"
   end
 
-  add_index "inventory_items", ["climber_id"], name: "index_inventory_items_on_climber_id"
+  add_index "inventory_items", ["user_id"], name: "index_inventory_items_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "name"
   end
 
 end
