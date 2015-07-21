@@ -1,6 +1,7 @@
 class InventoryItemsController < ApplicationController
+  include SessionsHelper
   before_action :set_inventory_item, only: [:show, :edit, :update, :destroy]
-
+  before_action :authentication_required
   # GET /inventory_items
   # GET /inventory_items.json
   def index

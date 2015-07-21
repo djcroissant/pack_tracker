@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712030531) do
+ActiveRecord::Schema.define(version: 20150718161620) do
 
   create_table "climbers", force: :cascade do |t|
+    t.integer  "expedition_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "climbers", ["expedition_id"], name: "index_climbers_on_expedition_id"
 
   create_table "climbers_expeditions", id: false, force: :cascade do |t|
     t.integer "climber_id"
@@ -52,5 +55,12 @@ ActiveRecord::Schema.define(version: 20150712030531) do
   end
 
   add_index "inventory_items", ["climber_id"], name: "index_inventory_items_on_climber_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end

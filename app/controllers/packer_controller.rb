@@ -2,6 +2,9 @@
 #be updated
 
 class PackerController < ApplicationController
+  include SessionsHelper
+  before_action :authentication_required
+
   def allocate
     @expedition = Expedition.first
     @climber = Climber.first
@@ -24,6 +27,12 @@ class PackerController < ApplicationController
           item.expeditions.delete(@expedition)
         end
       end
+    end
+  end
+
+  def welcome
+    if !signed_in?
+      redirect_to login_path
     end
   end
 
