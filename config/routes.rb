@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new', as: :login
   post'login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy', as: :logout
+  get 'packer/logout' => 'sessions#destroy', as: :logout
 
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
