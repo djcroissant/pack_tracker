@@ -1,8 +1,10 @@
 <h1>Your Expeditions</h1>
 
 <% if @expeditions.empty? %>
-  <p>You're not signed up for any expeditions yet!</p>
+  <h2>You're not signed up for any expeditions yet!</h2>
+  <p><%= link_to "Create/Join a new Expedition", expedition_create_path %></p>
 <% else %>
+  <p><%= link_to "Create/Join a new Expedition", join_expedition_path %></p>
   <table class="table table-hover table-bordered table-condensed">
     <thead>
       <tr>
@@ -24,8 +26,5 @@
       <% end %>
     </tbody>
   </table>
+  <p><%= link_to "Create/Join a new Expedition", join_expedition_path %></p>
 <% end %>
-
-<br>
-
-<p><%# link_to 'Create/Join an Expedition', join_expedition_path %></p>

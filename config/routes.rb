@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
   get 'packer/practice' => 'packer#practice', as: 'packer_practice'
 
+  get 'expeditions/join' => 'expeditions#join', as: 'join_expedition'
+
   #get 'expeditions' => 'expeditions#index', as: 'expeditions'
 
   # The priority is based upon order of creation: first created -> highest priority.
