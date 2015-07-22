@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :inventory_items
-  resources :packed_items
+  resources :expeditions, only: [:index, :new, :create, :destroy]
 
   get 'login' => 'sessions#new', as: :login
   post'login' => 'sessions#create'
@@ -11,15 +11,20 @@ Rails.application.routes.draw do
 
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
-
   get 'packer/practice' => 'packer#practice', as: 'packer_practice'
+
+  get 'expeditions/upcoming' => 'expeditions#upcoming', as: 'upcoming_expedition'
+  get 'expeditions/join' => 'expeditions#join', as: 'join_expedition'
+  get 'expeditions/unjoin' => 'expeditions#unjoin', as: 'unjoin_expedition'
+
+  #get 'expeditions' => 'expeditions#index', as: 'expeditions'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 
-  root 'packer#welcome'
+  root 'expeditions#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
