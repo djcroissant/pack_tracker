@@ -2,9 +2,9 @@
 
 <% if @expeditions.empty? %>
   <h2>You're not signed up for any expeditions yet!</h2>
-  <p><%= link_to "Create/Join a new Expedition", expedition_create_path %></p>
+  <p><%= link_to "Create/Join a new Expedition", upcoming_expedition_path %></p>
 <% else %>
-  <p><%= link_to "Create/Join a new Expedition", join_expedition_path %></p>
+  <p><%= link_to "Create/Join a new Expedition", upcoming_expedition_path %></p>
   <table class="table table-hover table-bordered table-condensed">
     <thead>
       <tr>
@@ -19,12 +19,11 @@
       <% @expeditions.each do |expedition| %>
         <tr>
           <td><%= link_to "#{expedition.title}", packer_allocate_path(exp_id: expedition.id) %></td>
-          <td><%= expedition.date %></td>
+          <td><%= expedition.start_date %></td>
           <td><%= expedition.days %></td>
-          <td><%= link_to 'Delete', expedition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'remove', unjoin_expedition_path(expedition_id: expedition.id), data: { confirm: 'Are you sure you want to leave this expedition?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <p><%= link_to "Create/Join a new Expedition", join_expedition_path %></p>
 <% end %>

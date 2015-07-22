@@ -10,8 +10,6 @@ class ExpeditionsController < ApplicationController
     end
   end
 
-  def show
-  end
 
   def new
     @expedition = Expedition.new
@@ -25,8 +23,9 @@ class ExpeditionsController < ApplicationController
 
     respond_to do |format|
       if @expedition.save
-        format.html { redirect_to @expedition, notice: 'Expedition was successfully created.' }
-        format.json { render :show, status: :created, location: @expedition }
+        @expedition.users << current_user
+        format.html { redirect_to upcoming_expedition_path, notice: 'Expedition was successfully created.' }
+        format.json { render :get, status: :created, location: upcoming_expedition_path }
       else
         format.html { render :new }
         format.json { render json: @expedition.errors, status: :unprocessable_entity }
@@ -54,6 +53,25 @@ class ExpeditionsController < ApplicationController
     end
   end
 
+  def upcoming
+    @expeditions = Expedition.where("start_date > ?", Date.today).
+                              order("start_date ASC, title ASC")
+    @user = current_user
+  end
+
+  def join
+    expedition = Expedition.find_by(id: params[:expedition_id])
+    expedition.users << current_user
+    redirect_to upcoming_expedition_path, notice: "You successfully joined #{expedition.title ? expedition.title.titleize : 'the expedition'}"
+  end
+
+  def unjoin
+    expedition = Expedition.find_by(id: params[:expedition_id])
+    expedition.users.delete(current_user)
+    redirect_to expeditions_path, notice: "You successfully left #{expedition.title ? expedition.title.titleize : 'the expedition'}"
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_expedition
@@ -62,6 +80,6 @@ class ExpeditionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expedition_params
-      params.require(:expedition).permit(:title, :days)
+      params.require(:expedition).permit(:title, :days, :start_date)
     end
 end
