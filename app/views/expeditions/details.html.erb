@@ -1,0 +1,23 @@
+<h1><%= @expedition.title.titleize %></h1>
+<h3>Packing Lists</h3>
+
+
+<body>
+  <% @users.each do |user| %>
+		<h3><%= user.name.nil? ? user.email : user.name.titleize %></h3>
+
+		<table class="table-hover table-bordered table-condensed">
+		<tr>
+			<td><strong>Title</strong></td>
+			<td><strong>Weight</strong></td>
+		</tr>
+		<% items = @expedition_inventory.where(user_id: user.id).order("title") %>
+		<% items.each do |item| %>
+			<tr>
+				<td><%= item.title.titleize %></td>
+				<td><%= item.weight %></td>
+			</tr>
+		<% end %>
+		</table>
+	<% end %>
+</body>

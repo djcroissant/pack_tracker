@@ -1,0 +1,24 @@
+<h1><%= @expedition.title.titleize %></h1>
+<h3>Packing Lists</h3>
+
+<table class="table table-hover table-bordered table-condensed">
+  <thead>
+    <tr>
+      <% @users.each do |user| %>
+        <th><%= user.name.titleize %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= check_box_tag(user.id.to_s.to_sym, "Show",
+        inventory_item.expeditions.where(id: @expedition.id).present? ? true : false) %></td>
+        <td><%= inventory_item.weight %></td>
+        <td><%= inventory_item.title %></td>
+        <td><%= inventory_item.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
