@@ -2,9 +2,6 @@
 <h1><%= "#{@expedition.days} days" %></h1>
 <h2>Packing List:</h2>
 
-
-<% items = @expedition.inventory_items.where(user_id: @user.id) %>
-
 <table class="table table-hover table-bordered table-condensed">
   <thead>
     <tr>
@@ -16,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% items.each do |inventory_item| %>
+    <% @items.each do |inventory_item| %>
       <tr>
         <td><%= inventory_item.title %></td>
         <td><%= inventory_item.description %></td>
@@ -26,4 +23,4 @@
   </tbody>
 </table>
 
-<%= link_to  "Back to Allocation", packer_allocate_path(exp_id: @expedition.id), method: :get %>
+<%= link_to  "Add/Remove Items", packer_allocate_path(exp_id: @expedition.id), method: :get %>

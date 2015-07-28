@@ -18,7 +18,7 @@
     <tbody>
       <% @expeditions.each do |expedition| %>
         <tr>
-          <td><%= link_to "#{expedition.title}", packer_allocate_path(exp_id: expedition.id) %></td>
+          <td><%= link_to "#{expedition.title}", packing_list_path(exp_id: expedition.id) %></td>
           <td><%= expedition.start_date %></td>
           <td><%= expedition.days %></td>
           <td><%= link_to 'remove', unjoin_expedition_path(expedition_id: expedition.id), data: { confirm: 'Are you sure you want to leave this expedition?' } %></td>

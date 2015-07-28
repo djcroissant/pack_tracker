@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
   post 'packer/allocate' => 'packer#pack_it', as: 'pack_it'
   get 'packer/practice' => 'packer#practice', as: 'packer_practice'
+  get 'packer/packing_list' => 'packer#packing_list', as: 'packing_list'
 
   get 'expeditions/upcoming' => 'expeditions#upcoming', as: 'upcoming_expedition'
   get 'expeditions/join' => 'expeditions#join', as: 'join_expedition'
