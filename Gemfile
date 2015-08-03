@@ -30,6 +30,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'figaro'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -51,5 +53,7 @@ group :development, :test do
 
   gem 'factory_girl'
   gem 'factory_girl_rails'
-  
+  gem 'capybara'
+  gem 'mailcatcher'
+
 end
