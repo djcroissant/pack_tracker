@@ -5,4 +5,5 @@ class UserMailer < ApplicationMailer
     @user = user
     @url = 'http://google.com'
     mail(to: @user.email, subject: 'test welcome email')
+  end
 end
