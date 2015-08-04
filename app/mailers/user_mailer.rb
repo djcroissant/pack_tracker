@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    @url = 'http://google.com'
-    mail(to: @user.email, subject: 'test welcome email')
+    @link = 'http://google.com'
+    mail(to: @user.email, subject: 'Welcome to Pack Tracker!')
   end
 end
