@@ -31,7 +31,13 @@
              <% unless request.original_url.include? "sign_up" # if on sign_up page, don't list sign up as option on top bar%>
                <li><a href="/sign_up">Sign Up</a></li>
              <% end %>
+          <% else %>
+            <li><%= link_to "Expeditions", '/expeditions' %></li>
+            <li><%= link_to "Inventory", '/inventory_items' %></li>
+          
           <% end %>
+
+
 
           <!-- Dropdown from navbar -->
           <!-- <li class="dropdown">
@@ -61,8 +67,7 @@
         <% if signed_in? %>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><%= "Logged in as #{@current_user.email}"%></a></li>
-            <li><%= link_to "Expeditions", '/expeditions' %></li>
-            <li><%= link_to "Inventory", '/inventory_items' %></li>
+            
             <li><%= link_to "Log Out", logout_path %></li>
             <!-- Another dropdown from nav bar -->
             <!--
