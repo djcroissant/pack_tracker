@@ -1,15 +1,10 @@
-#This controller just takes User.first.  After login is enabled, this should
-#be updated
-
 class PackerController < ApplicationController
   include SessionsHelper
   before_action :authentication_required
 
   def allocate
     exp_id = params[:exp_id]
-    if signed_in?
-      @user = current_user
-    end
+    @user = current_user
     @expedition = Expedition.find_by(id: exp_id)
     @inventory_items = @user.inventory_items.order("title")
   end
@@ -43,9 +38,7 @@ class PackerController < ApplicationController
   end
 
   def welcome
-    if !signed_in?
-      redirect_to login_path
-    end
+
   end
 
 end
