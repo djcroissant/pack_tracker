@@ -37,6 +37,13 @@ class PackerController < ApplicationController
     @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
   end
 
+  # def packing_list
+  #   exp_id = params[:exp_id]
+  #   @user = current_user
+  #   @expedition = Expedition.find_by(id: exp_id)
+  #   # @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
+  # end
+
   def welcome
 
   end
