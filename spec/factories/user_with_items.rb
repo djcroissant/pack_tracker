@@ -7,13 +7,12 @@ FactoryGirl.define do
     sequence(:weight) { |n| n }
     user
     expeditions {[FactoryGirl.create(:expedition)]}
-    # expedition
   end
 
   factory :expedition do
     title "Expedition Title"
     sequence(:days) { |n| n }
-    # start_date Date.today
+    start_date Date.today
   end
 
   # user factory without associated inventory items
@@ -36,8 +35,6 @@ FactoryGirl.define do
       # attributes; `create_list`'s second argument is the number of records
       # to create and we make sure the user is associated properly to the inventory item
       after(:create) do |user, evaluator|
-        # expedition = FactoryGirl.create(:expedition)
-        # user.expedition = expedition
         create_list(:inventory_item, evaluator.inventory_items_count, user: user)#, expedition: user.expeditions.first)
         user.expeditions.first.inventory_items << user.inventory_items
       end
