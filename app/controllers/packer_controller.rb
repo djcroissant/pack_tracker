@@ -48,10 +48,4 @@ class PackerController < ApplicationController
     end
   end
 
-  def summary
-
-  end
-
-
-
 end
