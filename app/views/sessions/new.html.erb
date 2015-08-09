@@ -18,11 +18,11 @@
             <%= password_field_tag :password, nil, class: 'form-control input-lg' %>
           </div>
           <div class="actions">
-            <%= submit_tag "Login", class: 'btn-lg btn-success btn-block' %>
+            <%= submit_tag "Login", class: 'btn btn-lg btn-success btn-block' %>
           </div>
           <br>
           <div class="actions">
-            <%= submit_tag "Don't have an account? Sign Up!", class: 'btn-lg btn-default btn-block' %>
+            <%= link_to "Don't have an account? Sign Up!", sign_up_path, :class => 'btn btn-lg btn-default btn-block' %>
           </div>
           
         <% end %>
