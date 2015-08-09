@@ -66,7 +66,7 @@ class ExpeditionsController < ApplicationController
   end
 
   def unjoin
-    expedition = Expedition.find_by(id: params[:exp_id])
+    expedition = Expedition.find_by(id: params[:expedition_id])
     expedition.users.delete(current_user)
     redirect_to expeditions_path, notice: "You successfully left #{expedition.title ? expedition.title.titleize : 'the expedition'}"
   end
