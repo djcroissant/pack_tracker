@@ -1,6 +1,9 @@
 <h1><%= @expedition.title.titleize %></h1>
 
-<h2><%= "Pack for #{@expedition.days} Days" %></h2>
+<h3>Pack for <%= @expedition.days %> days, using items from your inventory list.</h3><br>
+<% if @inventory_items.first.nil? %>
+  <p> <em>Looks like you haven't yet created any inventory items.  You can <%= link_to "add some here", inventory_items_path %>. </em></p>
+<% end %>
 
 <%= form_tag do %>
 <table class="table table-hover table-bordered table-condensed">
@@ -26,6 +29,6 @@
   </tbody>
 </table>
 <%= hidden_field_tag :exp_id, @expedition.id %>
-<%= submit_tag "Update Packing List" %>
+<%= submit_tag "Update Packing List", :class => 'btn btn-lrg btn-success' %>
 
 <% end %>
