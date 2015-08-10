@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'expeditions/join' => 'expeditions#join', as: 'join_expedition'
   get 'expeditions/unjoin' => 'expeditions#unjoin', as: 'unjoin_expedition'
   get 'expeditions/details' => 'expeditions#details', as: 'expedition_details'
+  get 'expeditions/send_expedition_mailer' => 'expeditions#send_expedition_mailer', as: 'expedition_mailer'
 
   #get 'expeditions' => 'expeditions#index', as: 'expeditions'
 

@@ -10,6 +10,7 @@ class ExpeditionMailer < ApplicationMailer
   end
 
   def send_list(recipient)
+    @items = []
     @expedition.inventory_items.each do |inventory_item|
       if inventory_item.user_id == recipient.id
         @items << inventory_item
