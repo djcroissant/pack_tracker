@@ -3,15 +3,15 @@ class PackerController < ApplicationController
   before_action :authentication_required
 
   def allocate
-    exp_id = params[:exp_id]
+    expedition_id = params[:expedition_id]
     @user = current_user
-    @expedition = Expedition.find_by(id: exp_id)
+    @expedition = Expedition.find_by(id: expedition_id)
     @inventory_items = @user.inventory_items.order("title")
   end
 
   def pack_it
-    exp_id = params[:exp_id].to_i
-    @expedition = Expedition.find_by(id: exp_id)
+    expedition_id = params[:expedition_id].to_i
+    @expedition = Expedition.find_by(id: expedition_id)
     @user = current_user
     @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map {|i| i.to_i}
 
@@ -27,20 +27,20 @@ class PackerController < ApplicationController
         end
       end
     end
-    redirect_to packing_list_path(exp_id: @expedition.id)
+    redirect_to packing_list_path(expedition_id: @expedition.id)
   end
 
   def packing_list
-    exp_id = params[:exp_id]
+    expedition_id = params[:expedition_id]
     @user = current_user
-    @expedition = Expedition.find_by(id: exp_id)
+    @expedition = Expedition.find_by(id: expedition_id)
     @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
   end
 
   # def packing_list
-  #   exp_id = params[:exp_id]
+  #   expedition_id = params[:expedition_id]
   #   @user = current_user
-  #   @expedition = Expedition.find_by(id: exp_id)
+  #   @expedition = Expedition.find_by(id: expedition_id)
   #   # @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
   # end
 
