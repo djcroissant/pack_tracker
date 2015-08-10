@@ -79,6 +79,12 @@ class ExpeditionsController < ApplicationController
     @expedition_inventory = @expedition.inventory_items
   end
 
+  def send_expedition_mailer
+    ExpeditionMailer.items_email(@expedition).deliver
+    redirect_to request.referer, :notice => "Emails have gone out to the group!"
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,10 +6,13 @@
   <body>
     <h1>Hi <% @user.email %>, </h1>
     <p>
-      Welcome to Pack Tracker!
+      Your trip is coming up.  Don't forget to bring your stuff!  Here's what you need to bring:
     </p>
-    <p>
-      To login to the site, just follow this link <%= @url %>.
-    </p>
+    <ul>
+    <% @items.each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+    </ul>
+    
   </body>
 </html>
