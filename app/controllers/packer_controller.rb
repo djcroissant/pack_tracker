@@ -1,6 +1,3 @@
-#This controller just takes User.first.  After login is enabled, this should
-#be updated
-
 class PackerController < ApplicationController
   include SessionsHelper
   before_action :authentication_required
@@ -24,8 +21,10 @@ class PackerController < ApplicationController
     @items = InventoryItem.where(user_id: @user.id)
 
     @items.each do |item|
+      #user wanted to pack item but item not already packed
       if @packed_ids.include?(item.id) && !@expedition_snapshot.include?(item.id)
         item.expeditions << @expedition
+      #user did not want to pack item but item currently shown as packed
       elsif !@packed_ids.include?(item.id) && @expedition_snapshot.include?(item.id)
         item.expeditions.delete(@expedition)
       end
