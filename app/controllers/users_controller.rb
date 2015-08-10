@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       puts "@user = #{@user}"
       puts "User.first = #{User.first}"
       session[:user_id] = @user.id
-      UserMailer.welcome_email(@user).deliver
+      UserMailer.welcome_email(@user).deliver_now
       redirect_to root_url, :notice => "You have signed up!"
     else
       render "new"
