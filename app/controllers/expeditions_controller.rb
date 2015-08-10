@@ -4,10 +4,8 @@ class ExpeditionsController < ApplicationController
   before_action :authentication_required
 
   def index
-    if signed_in?
-      @user = current_user
-      @expeditions = @user.expeditions.order("title")
-    end
+    @user = current_user
+    @expeditions = @user.expeditions.order("title")
   end
 
 
