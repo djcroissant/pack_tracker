@@ -27,6 +27,7 @@ class PackerController < ApplicationController
         item.expeditions.delete(@expedition)
       end
     end
+    # @test = @user.
     redirect_to packing_list_path(expedition_id: @expedition.id)
   end
 

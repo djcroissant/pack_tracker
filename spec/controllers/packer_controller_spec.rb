@@ -57,5 +57,43 @@ describe PackerController do
     end
   end
 
+describe "#pack_it" do
+  context "when not signed in" do
+    it "redirects to sign in page" do
+      get :pack_it
+      expect(response).to redirect_to(login_url)
+    end
+  end
+
+  context "when signed in" do
+    before do
+      sign_in user
+    end
+
+    it "modifies inventory items in user's expedition based on user's selection" do
+      packed_items = user.expeditions.first.inventory_items.map do |i|
+        #makes it random whether a piece of inventory is "selected"
+        if rand(2) == 0
+          {i.id.to_s => "value" }
+        end
+      end
+      packed_items.compact!
+
+      if packed_items.empty?
+        packed_params = Hash.new
+        packed_ids = Array.new
+      else
+        packed_params = packed_items.reduce Hash.new, :merge
+        packed_ids = packed_params.keys.map { |k| k.to_i }
+      end
+
+      packed_params[:expedition_id] = user.expeditions.first.id
+      get :pack_it, packed_params
+
+
+      expect(assigns(:user).expeditions.first.inventory_items.where(user_id: user.id).map { |i| i.id }).to eq packed_ids
+    end
+  end
+end
 
 end
