@@ -70,9 +70,9 @@ class ExpeditionsController < ApplicationController
   end
 
   def details
-    exp_id = params[:exp_id]
+    expedition_id = params[:expedition_id]
     @user = current_user
-    @expedition = Expedition.find_by(id: exp_id)
+    @expedition = Expedition.find_by(id: expedition_id)
     @users = @expedition.users
     @expedition_inventory = @expedition.inventory_items
   end
