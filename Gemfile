@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'figaro', '~> 0.7.0'
 
+gem 'omniauth-twitter'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
