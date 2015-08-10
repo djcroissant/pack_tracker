@@ -1,6 +1,6 @@
 class ExpeditionsController < ApplicationController
   include SessionsHelper
-  before_action :set_expedition, only: [:show, :edit, :update, :destroy]
+  before_action :set_expedition, only: [:show, :edit, :update, :destroy, :send_expedition_mailer]
   before_action :authentication_required
 
   def index
@@ -66,7 +66,7 @@ class ExpeditionsController < ApplicationController
   end
 
   def unjoin
-    expedition = Expedition.find_by(id: params[:expedition_id])
+    expedition = Expedition.find_by(id: params[:exp_id])
     expedition.users.delete(current_user)
     redirect_to expeditions_path, notice: "You successfully left #{expedition.title ? expedition.title.titleize : 'the expedition'}"
   end
@@ -77,6 +77,14 @@ class ExpeditionsController < ApplicationController
     @expedition = Expedition.find_by(id: exp_id)
     @users = @expedition.users
     @expedition_inventory = @expedition.inventory_items
+  end
+
+  def send_expedition_mailer
+    puts "******* IN SEND_EXPEDITION_MAILER ********"
+    puts "@expedition.id in send_expedition_mailer actino is #{@expedition.id}"
+    ExpeditionMailer.items_email(@expedition).deliver
+    redirect_to request.referer, :notice => "Emails have gone out to the group!"
+
   end
 
 

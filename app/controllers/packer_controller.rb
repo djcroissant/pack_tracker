@@ -34,7 +34,14 @@ class PackerController < ApplicationController
     exp_id = params[:exp_id]
     @user = current_user
     @expedition = Expedition.find_by(id: exp_id)
-    @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
+    @users = @expedition.users
+    # Displaying all items in packing list for expedition.  Code could be cleaner...
+    @items = []
+    @expedition.inventory_items.each do |inventory_item|
+      @items << inventory_item
+      puts "@items.last = #{@items.last}"
+    end
+    # @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
   end
 
   # def packing_list
