@@ -5,10 +5,8 @@ class InventoryItemsController < ApplicationController
   # GET /inventory_items
   # GET /inventory_items.json
   def index
-    if signed_in?
-      @user = current_user
-      @inventory_items = @user.inventory_items.order("title")
-    end
+    @user = current_user
+    @inventory_items = @user.inventory_items.order("title")
   end
 
   # GET /inventory_items/1
@@ -29,10 +27,8 @@ class InventoryItemsController < ApplicationController
   # POST /inventory_items.json
   def create
     @inventory_item = InventoryItem.new(inventory_item_params)
-    if signed_in?
-      @user = current_user
-      @inventory_item.user_id = @user.id
-    end
+    @user = current_user
+    @inventory_item.user_id = @user.id
 
     respond_to do |format|
       if @inventory_item.save

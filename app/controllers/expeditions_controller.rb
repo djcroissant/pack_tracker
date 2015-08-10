@@ -4,10 +4,8 @@ class ExpeditionsController < ApplicationController
   before_action :authentication_required
 
   def index
-    if signed_in?
-      @user = current_user
-      @expeditions = @user.expeditions.order("title")
-    end
+    @user = current_user
+    @expeditions = @user.expeditions.order("title")
   end
 
 
@@ -66,15 +64,15 @@ class ExpeditionsController < ApplicationController
   end
 
   def unjoin
-    expedition = Expedition.find_by(id: params[:exp_id])
+    expedition = Expedition.find_by(id: params[:expedition_id])
     expedition.users.delete(current_user)
     redirect_to expeditions_path, notice: "You successfully left #{expedition.title ? expedition.title.titleize : 'the expedition'}"
   end
 
   def details
-    exp_id = params[:exp_id]
+    expedition_id = params[:expedition_id]
     @user = current_user
-    @expedition = Expedition.find_by(id: exp_id)
+    @expedition = Expedition.find_by(id: expedition_id)
     @users = @expedition.users
     @expedition_inventory = @expedition.inventory_items
   end
