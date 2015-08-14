@@ -14,7 +14,7 @@ class PackerController < ApplicationController
     @expedition = Expedition.find_by(id: expedition_id)
     @user = current_user
     #what user selected to include in packing list
-    @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map {|i| i.to_i}
+    @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map(&:to_i)
     #what is already included in this user's packing list for this expedition
     @expedition_snapshot = @expedition.inventory_items.where(user_id: @user.id).map{|i| i.id}
     #all the items for this user
@@ -22,7 +22,7 @@ class PackerController < ApplicationController
 
     @items.each do |item|
       if @packed_ids.include?(item.id) && !@expedition_snapshot.include?(item.id)
-        item.expeditions << @expedition
+        item.add_expedition(@expedition)
       elsif !@packed_ids.include?(item.id) && @expedition_snapshot.include?(item.id)
         item.expeditions.delete(@expedition)
       end
@@ -35,13 +35,8 @@ class PackerController < ApplicationController
     @user = current_user
     @expedition = Expedition.find_by(id: expedition_id)
     @users = @expedition.users
-    # Displaying all items in packing list for expedition.  Code could be cleaner...
-    @items = []
-    @expedition.inventory_items.each do |inventory_item|
-      @items << inventory_item
-      puts "@items.last = #{@items.last}"
-    end
-    # @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
+    # Displaying all items in packing list for expedition.
+    @items = @expedition.inventory_items.order("title")
   end
 
   # def packing_list

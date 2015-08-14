@@ -43,7 +43,7 @@ describe PackerController do
     context "when signed in" do
       before do
         sign_in user
-        get :packing_list, {expedition_id: user.expeditions.first.id}
+        get :packing_list, expedition_id: user.expeditions.first.id
       end
 
       it "is successful" do
