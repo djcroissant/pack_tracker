@@ -13,13 +13,13 @@ class PackerController < ApplicationController
     exp_id = params[:exp_id].to_i
     @expedition = Expedition.find_by(id: exp_id)
     @user = current_user
-    @packed_ids = (params.select {|inventory_item_id, status| inventory_item_id =~ /^\d+/}).keys.map {|i| i.to_i}
+    @packed_ids = (params.select {|inventory_item_id, _status| inventory_item_id =~ /^\d+/}).keys.map(&:to_i)
 
     @items = InventoryItem.where(user_id: @user.id)
     @items.each do |item|
       if @packed_ids.include?(item.id)
         if item.expeditions.where(id: @expedition.id).empty?
-          item.expeditions << @expedition
+          item.add_expedition(@expedition)
         end
       else
         if item.expeditions.where(id: @expedition.id).present?
@@ -36,11 +36,12 @@ class PackerController < ApplicationController
     @expedition = Expedition.find_by(id: exp_id)
     @users = @expedition.users
     # Displaying all items in packing list for expedition.  Code could be cleaner...
-    @items = []
-    @expedition.inventory_items.each do |inventory_item|
-      @items << inventory_item
-      puts "@items.last = #{@items.last}"
-    end
+    @items = @expedition.inventory_items.order("title")
+    # @items = []
+    # @expedition.inventory_items.each do |inventory_item|
+    #   @items << inventory_item
+    #   puts "@items.last = #{@items.last}"
+    # end
     # @items = @expedition.inventory_items.where(user_id: @user.id).order("title")
   end
 

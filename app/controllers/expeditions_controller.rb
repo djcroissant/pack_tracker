@@ -4,12 +4,9 @@ class ExpeditionsController < ApplicationController
   before_action :authentication_required
 
   def index
-    if signed_in?
-      @user = current_user
-      @expeditions = @user.expeditions.order("title")
-    end
+    @user = current_user
+    @expeditions = @user.expeditions.order("title")
   end
-
 
   def new
     @expedition = Expedition.new
@@ -23,7 +20,7 @@ class ExpeditionsController < ApplicationController
 
     respond_to do |format|
       if @expedition.save
-        @expedition.users << current_user
+        @expedition.add_user(current_user)
         format.html { redirect_to upcoming_expedition_path, notice: 'Expedition was successfully created.' }
         format.json { render :get, status: :created, location: upcoming_expedition_path }
       else
@@ -54,14 +51,14 @@ class ExpeditionsController < ApplicationController
   end
 
   def upcoming
-    @expeditions = Expedition.where("start_date > ?", Date.today).
-                              order("start_date ASC, title ASC")
+    @expeditions = Expedition.where("start_date > ?", Date.today)
+                             .order("start_date ASC, title ASC")
     @user = current_user
   end
 
   def join
     expedition = Expedition.find_by(id: params[:expedition_id])
-    expedition.users << current_user
+    expedition.add_user(current_user)
     redirect_to upcoming_expedition_path, notice: "You successfully joined #{expedition.title ? expedition.title.titleize : 'the expedition'}"
   end
 
@@ -83,19 +80,18 @@ class ExpeditionsController < ApplicationController
     puts "******* IN SEND_EXPEDITION_MAILER ********"
     puts "@expedition.id in send_expedition_mailer actino is #{@expedition.id}"
     ExpeditionMailer.items_email(@expedition).deliver
-    redirect_to request.referer, :notice => "Emails have gone out to the group!"
+    redirect_to request.referer, notice: "Emails have gone out to the group!"
 
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_expedition
-      @expedition = Expedition.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_expedition
+    @expedition = Expedition.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def expedition_params
-      params.require(:expedition).permit(:title, :days, :start_date)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def expedition_params
+    params.require(:expedition).permit(:title, :days, :start_date)
+  end
 end

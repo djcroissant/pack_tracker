@@ -34,6 +34,9 @@ gem 'figaro', '~> 0.7.0'
 
 gem 'omniauth-twitter'
 
+# Identify violations of best practices
+gem 'rubocop', require: false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -41,7 +44,7 @@ gem 'omniauth-twitter'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  #Testing!
+  # Testing!
   gem 'rspec-rails', '~> 3.2.1'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
