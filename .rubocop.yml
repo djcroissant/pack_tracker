@@ -1,0 +1,6 @@
+# inherit allows you to change specific settings for each directory
+# the settings after this line override what was inherited
+inherit_from: .rubocop_todo.yml
+
+Metrics/LineLength:
+  Enabled: false

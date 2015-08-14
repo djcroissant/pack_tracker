@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :expeditions, only: [:index, :new, :create, :destroy]
 
   get 'login' => 'sessions#new', as: :login
-  post'login' => 'sessions#create'
+  post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
 
   get 'packer/allocate' => 'packer#allocate', as: 'packer_allocate'
