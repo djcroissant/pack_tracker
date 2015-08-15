@@ -7,13 +7,11 @@ RSpec.describe "inventory_items/index", type: :view do
         :title => "Title",
         :description => "MyText",
         :weight => 1,
-        :group_item => false
       ),
       InventoryItem.create!(
         :title => "Title",
         :description => "MyText",
         :weight => 1,
-        :group_item => false
       )
     ])
   end
@@ -23,6 +21,5 @@ RSpec.describe "inventory_items/index", type: :view do
     assert_select "tr>td", :text => "Title".to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
     assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
   end
 end
