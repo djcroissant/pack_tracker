@@ -6,8 +6,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      puts "@user = #{@user}"
-      puts "User.first = #{User.first}"
       session[:user_id] = @user.id
       UserMailer.welcome_email(@user).deliver_now
       redirect_to root_url, :notice => "You have signed up!"

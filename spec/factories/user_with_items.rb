@@ -17,13 +17,14 @@ FactoryGirl.define do
 
   # user factory without associated inventory items
   factory :user do
-    expeditions {[FactoryGirl.create(:expedition)]}
     sequence(:name) { |n| "user#{n}" }
     sequence(:email) { |n| "test#{n}@example.com" }
     password "Password"
 
     # user_with_items will create inventory item data after the user has been created
     factory :user_with_items do
+      expeditions {[FactoryGirl.create(:expedition)]}
+
       # inventory items_count is declared as a transient attribute and available in
       # attributes on the factory, as well as the callback via the evaluator
       transient do

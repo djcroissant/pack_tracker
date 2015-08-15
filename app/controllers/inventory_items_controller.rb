@@ -9,11 +9,6 @@ class InventoryItemsController < ApplicationController
     @inventory_items = @user.inventory_items.order("title")
   end
 
-  # GET /inventory_items/1
-  # GET /inventory_items/1.json
-  def show
-  end
-
   # GET /inventory_items/new
   def new
     @inventory_item = InventoryItem.new
@@ -46,7 +41,7 @@ class InventoryItemsController < ApplicationController
   def update
     respond_to do |format|
       if @inventory_item.update(inventory_item_params)
-        format.html { redirect_to @inventory_item, notice: 'Inventory item was successfully updated.' }
+        format.html { redirect_to inventory_items_path, notice: "#{@inventory_item.title} was successfully updated." }
         format.json { render :show, status: :ok, location: @inventory_item }
       else
         format.html { render :edit }
@@ -60,7 +55,7 @@ class InventoryItemsController < ApplicationController
   def destroy
     @inventory_item.destroy
     respond_to do |format|
-      format.html { redirect_to inventory_items_url, notice: 'Inventory item was successfully destroyed.' }
+      format.html { redirect_to inventory_items_url, notice: "#{@inventory_item.title} was removed from your inventory." }
       format.json { head :no_content }
     end
   end
