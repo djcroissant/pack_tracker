@@ -36,6 +36,7 @@ describe InventoryItemsController, type: :controller do
   let(:user) { create(:user_with_items) }
   let(:inventory_item) { create(:inventory_item) }
   let(:attributes) { attributes_for :inventory_item }
+  let(:new_attributes) { { title: "new_title", description: "new_description", weight: 50 } }
   # let(:invalid_attributes) { weight: "invalid weight" }
 
 
@@ -104,6 +105,8 @@ describe InventoryItemsController, type: :controller do
       end
     end
 
+    #  Currently, there are no checks to invalidate certain params
+    #  so there's nothing to test for here
     # context "with invalid params" do
     #   before do
     #     sign_in user
@@ -122,60 +125,63 @@ describe InventoryItemsController, type: :controller do
   end
 
   describe "PUT #update" do
-    context "with valid params" do
-      # let(:new_attributes) {
-      #   title: "new_title", description: "new_description", weight: 50
-      # }
+    before do
+      sign_in user
+    end
 
+    context "with valid params" do
       it "updates the requested inventory_item" do
-        sign_in user
-        # inventory_item = InventoryItem.create! valid_attributes
-        put :update, {:id => inventory_item.to_param, :inventory_item => new_attributes}
+        put :update, {:id => inventory_item.to_param, :inventory_item => new_attributes }
         inventory_item.reload
-        #expect(inventory_item.title).to eq("new_title")
-         skip("Add assertions for updated state")
+        expect(inventory_item.title).to eq("new_title")
+        expect(inventory_item.description).to eq("new_description")
+        expect(inventory_item.weight).to eq(50)
       end
 
       it "assigns the requested inventory_item as @inventory_item" do
-        inventory_item = InventoryItem.create! valid_attributes
-        put :update, {:id => inventory_item.to_param, :inventory_item => valid_attributes}, valid_session
+        put :update, {:id => inventory_item.to_param, :inventory_item => new_attributes }
         expect(assigns(:inventory_item)).to eq(inventory_item)
       end
 
-      it "redirects to the inventory_item" do
-        inventory_item = InventoryItem.create! valid_attributes
-        put :update, {:id => inventory_item.to_param, :inventory_item => valid_attributes}, valid_session
-        expect(response).to redirect_to(inventory_item)
+      it "redirects to the index of inventory_items" do
+        put :update, {:id => inventory_item.to_param, :inventory_item => new_attributes }
+        expect(response).to redirect_to(inventory_items_path)
       end
     end
 
-    context "with invalid params" do
-      it "assigns the inventory_item as @inventory_item" do
-        inventory_item = InventoryItem.create! valid_attributes
-        put :update, {:id => inventory_item.to_param, :inventory_item => invalid_attributes}, valid_session
-        expect(assigns(:inventory_item)).to eq(inventory_item)
-      end
-
-      it "re-renders the 'edit' template" do
-        inventory_item = InventoryItem.create! valid_attributes
-        put :update, {:id => inventory_item.to_param, :inventory_item => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
+  #  Currently, there are no checks to invalidate certain params
+  #  so there's nothing to test for here
+  #   context "with invalid params" do
+  #     it "assigns the inventory_item as @inventory_item" do
+  #       inventory_item = InventoryItem.create! valid_attributes
+  #       put :update, {:id => inventory_item.to_param, :inventory_item => invalid_attributes}, valid_session
+  #       expect(assigns(:inventory_item)).to eq(inventory_item)
+  #     end
+  #
+  #     it "re-renders the 'edit' template" do
+  #       inventory_item = InventoryItem.create! valid_attributes
+  #       put :update, {:id => inventory_item.to_param, :inventory_item => invalid_attributes}, valid_session
+  #       expect(response).to render_template("edit")
+  #     end
+  #   end
   end
 
   describe "DELETE #destroy" do
+    before do
+      sign_in user
+    end
+
     it "destroys the requested inventory_item" do
-      inventory_item = InventoryItem.create! valid_attributes
+      inventory_item
       expect {
-        delete :destroy, {:id => inventory_item.to_param}, valid_session
+        delete :destroy, {:id => inventory_item.id}
       }.to change(InventoryItem, :count).by(-1)
     end
 
     it "redirects to the inventory_items list" do
-      inventory_item = InventoryItem.create! valid_attributes
-      delete :destroy, {:id => inventory_item.to_param}, valid_session
-      expect(response).to redirect_to(inventory_items_url)
+      inventory_item
+      delete :destroy, {:id => inventory_item.to_param}
+      expect(response).to redirect_to(inventory_items_path)
     end
   end
 end
