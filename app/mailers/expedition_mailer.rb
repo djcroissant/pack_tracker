@@ -19,7 +19,7 @@ class ExpeditionMailer < ApplicationMailer
     #   end
     # end
     # @items.sort!
-    mail(to: recipient.email, subject: 'test list email')
+    mail(to: recipient.email, subject: 'Your PackTracker Packing List')
   end
 
 end
