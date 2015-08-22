@@ -19,7 +19,7 @@
     <tbody>
       <% @expeditions.each do |expedition| %>
         <tr>
-          <td><%= expedition.title %></td>
+          <td><%= link_to "#{expedition.title}", packing_list_path(expedition_id: expedition.id) %></td>
           <td><%= expedition.start_date %></td>
           <td><%= expedition.days %></td>
           <% if expedition.users.where(id: @user.id).empty? %>
