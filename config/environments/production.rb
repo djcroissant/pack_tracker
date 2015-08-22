@@ -17,12 +17,12 @@ Rails.application.configure do
   # Use Mandrill for outbound email
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
-    :port      => 587,
+    :port      => 25,
     :enable_starttls_auto => true,
     :user_name => MANDRILL['MANDRILL_USERNAME'],
     :password  => MANDRILL['MANDRILL_PASSWORD'],
     :authentication => 'login',
-    :domain => 'gmail.com',
+    :domain => 'mandrillapp.com',
   }
 
 
