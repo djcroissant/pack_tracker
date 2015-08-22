@@ -19,8 +19,8 @@ Rails.application.configure do
     :address   => "smtp.mandrillapp.com",
     :port      => 25,
     :enable_starttls_auto => true,
-    :user_name => MANDRILL['MANDRILL_USERNAME'],
-    :password  => MANDRILL['MANDRILL_PASSWORD'],
+    :user_name => MANDRILL_USERNAME,
+    :password  => MANDRILL_PASSWORD,
     :authentication => 'login',
     :domain => 'mandrillapp.com',
   }
