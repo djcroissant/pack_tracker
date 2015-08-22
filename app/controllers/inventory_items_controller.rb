@@ -21,12 +21,12 @@ class InventoryItemsController < ApplicationController
   # POST /inventory_items
   # POST /inventory_items.json
   def create
-    @inventory_item = InventoryItem.new(inventory_item_params)
     @user = current_user
-    @inventory_item.user_id = @user.id
+    @inventory_item = @user.inventory_items.build(inventory_item_params)
 
     respond_to do |format|
       if @inventory_item.save
+
         format.html { redirect_to inventory_items_url, notice: "#{@inventory_item.title} was added to inventory." }
         format.json { render :show, status: :created, location: @inventory_item }
       else
