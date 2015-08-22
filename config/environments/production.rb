@@ -14,18 +14,15 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Use Gmail for outbound email
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'https://pack-tracker.herokuapp.com'}
-  config.action_mailer.delivery_method = :smtp
+  # Use Mandrill for outbound email
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: "587",
-    domain: "gmail.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV['GMAIL_USERNAME_PROD'],
-    password: ENV['GMAIL_PASSWORD_PROD']
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587,
+    :enable_starttls_auto => true,
+    :user_name => MANDRILL['MANDRILL_USERNAME'],
+    :password  => MANDRILL['MANDRILL_PASSWORD'],
+    :authentication => 'login',
+    :domain => 'gmail.com',
   }
 
 
@@ -37,7 +34,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.serve_static_files = true #ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier

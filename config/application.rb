@@ -6,6 +6,16 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Configure Mandrill
+if Rails.env == 'production'
+  MANDRILL = { MANDRILL_USERNAME: ENV['MANDRILL_USER'],
+               MANDRILL_PASSWORD: ENV['MANDRILL_PASS'] }
+else
+  MANDRILL = YAML.load(File.read(File.expand_path('../mandrill.yml', __FILE__)))
+  MANDRILL.merge! MANDRILL.fetch(Rails.env, {})
+  MANDRILL.symbolize_keys!
+end
+
 module PackTracker
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
