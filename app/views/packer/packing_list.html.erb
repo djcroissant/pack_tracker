@@ -29,4 +29,4 @@
 </table>
 
 <%= link_to  "Add/Remove Items", packer_allocate_path(expedition_id: @expedition.id), method: :get, :class => 'btn btn-lrg btn-default' %>
-<%= link_to  "Email Responsibilities", expedition_mailer_path(id: @expedition.id), method: :get, :class => 'btn btn-lrg btn-default' %>
+<%= link_to  "Email Responsibilities", expedition_mailer_path(id: @expedition.id), method: :get, :class => 'btn btn-lrg btn-default', :style => 'display: none;' %>

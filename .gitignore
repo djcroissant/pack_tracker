@@ -21,3 +21,5 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/secrets.yml
+/config/mandrill.yml
