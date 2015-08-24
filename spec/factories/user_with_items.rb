@@ -13,6 +13,7 @@ FactoryGirl.define do
     title "Expedition Title"
     sequence(:days) { |n| n }
     start_date Date.today
+    users {[FactoryGirl.create(:user)]}
   end
 
   # user factory without associated inventory items

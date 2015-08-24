@@ -1,11 +1,11 @@
 class ExpeditionMailer < ApplicationMailer
-  default from: "me@gmail.com"
+  default from: "team@pack-tracker.herokuapp.com"
 
   def items_email(expedition)
     @expedition = expedition
     @recipients = @expedition.users
     @recipients.each do |recipient|
-      send_list(recipient).deliver_now
+      send_list(recipient).deliver
     end
   end
 
