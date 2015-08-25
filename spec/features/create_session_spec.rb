@@ -23,20 +23,20 @@ describe "creating a session" do
     end
   end
 
-  # context "after signing in" do
-  #   let(:user) { create(:user) }
+  context "after signing in" do
+    let(:user) { create(:user) }
 
-  #   before do
-  #     login_as user
-  #   end
+    before do
+      login_as user
+    end
 
-  #   it "has certain links" do
-  #     expect(page).to have_link "SETTINGS"
-  #     expect(page).to have_link "LOGOUT"
-  #   end
+    it "has certain links" do
+      expect(page).to have_link "Expeditions"
+      expect(page).to have_link "Inventory"
+    end
 
-  #   it "shows users links on dashboard" do
-  #     expect(page).to have_table "link_table"
-  #   end
-  # end
+    it "tells the new user they don't have any expeditions yet" do
+      expect(page).to have_content "You're not signed up for any expeditions yet"
+    end
+  end
 end
