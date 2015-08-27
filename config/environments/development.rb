@@ -16,7 +16,15 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+  config.action_mailer.smtp_settings = { 
+    :address   => "smtp.mandrillapp.com",
+    :port      => 25,
+    :enable_starttls_auto => true,
+    :user_name => MANDRILL[:MANDRILL_USERNAME], # 'derek.covey@gmail.com',
+    :password  => MANDRILL[:MANDRILL_PASSWORD], # 'Bi7pe9S01JW7ockIbQ9smQ',
+    :authentication => 'login',
+    :domain => 'mandrillapp.com'
+    }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
