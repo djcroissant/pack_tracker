@@ -11,14 +11,6 @@ class ExpeditionMailer < ApplicationMailer
 
   def send_list(recipient)
     @items = @expedition.inventory_items.where(user_id: recipient.id).order("title")
-    # @items = []
-    # @expedition.inventory_items.each do |inventory_item|
-    #   if inventory_item.user_id == recipient.id
-    #     @items << inventory_item
-    #     puts "@items.last = #{@items.last}"
-    #   end
-    # end
-    # @items.sort!
     mail(to: recipient.email, subject: 'Your PackTracker Packing List')
   end
 
