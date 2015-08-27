@@ -8,8 +8,8 @@ Bundler.require(*Rails.groups)
 
 # Configure Mandrill
 if Rails.env == 'production'
-  MANDRILL = { MANDRILL_USERNAME: ENV['MANDRILL_USER'],
-               MANDRILL_PASSWORD: ENV['MANDRILL_PASS'] }
+  MANDRILL = { MANDRILL_USERNAME: ENV['MANDRILL_USERNAME'],
+               MANDRILL_PASSWORD: ENV['MANDRILL_PASSWORD'] }
 else
   MANDRILL = YAML.load(File.read(File.expand_path('../mandrill.yml', __FILE__)))
   MANDRILL.merge! MANDRILL.fetch(Rails.env, {})
