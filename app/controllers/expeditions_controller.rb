@@ -5,8 +5,12 @@ class ExpeditionsController < ApplicationController
 
   def index
     @user = current_user
-    @expeditions = @user.expeditions.order("title")
-  end
+    # array that holds all expeditions with date of today or later
+    @expeditions_future = @user.expeditions.where("start_date >= ?", Date.today)
+                                           .order("start_date ASC, title ASC")
+    # array that holds all expeditions with date earlier than today
+    @expeditions_past = @user.expeditions.where("start_date < ?", Date.today)
+                                         .order("start_date ASC, title ASC")  end
 
 
   def new
