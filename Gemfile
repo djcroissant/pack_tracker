@@ -39,6 +39,8 @@ gem 'omniauth-twitter'
 # Identify violations of best practices
 gem 'rubocop', require: false
 
+gem 'whenever', :require => false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -4,15 +4,15 @@
     <meta content='text/html'; charse='UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h3>Hi, </h3>
+    <h3>Hi <%= @user.email %>,</h3>
     <p>
-      Your trip is coming up on <%= @expedition.start_date %>.  Don't forget to bring your stuff!  Here's what you need to bring:
+      Your expedition to <%= @expedition.title %> is coming up on <%= @expedition.start_date %>.  Don't forget to bring your stuff!  Here's what you need to bring:
     </p>
     <ul>
     <% @items.each do |item| %>
       <li><%= item.title %>&nbsp;-&nbsp;<%= item.description %></li>
     <% end %>
     </ul>
-    
+
   </body>
 </html>
