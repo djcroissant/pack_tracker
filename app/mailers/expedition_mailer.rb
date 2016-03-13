@@ -1,5 +1,5 @@
 class ExpeditionMailer < ApplicationMailer
-  default from: "team@pack-tracker.herokuapp.com"
+  default from: "mail@motorcyclephilanthropy.org"
 
   def items_email(expedition, user)
     @expedition = expedition

@@ -14,15 +14,16 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Use Mandrill for outbound email
+  # Use SparkPost for outbound email
   config.action_mailer.smtp_settings = {
-    :address   => "smtp.mandrillapp.com",
-    :port      => 25,
-    :enable_starttls_auto => true,
-    :user_name => 'derek.covey@gmail.com',
-    :password  => 'Bi7pe9S01JW7ockIbQ9smQ',
-    :authentication => 'login',
-    :domain => 'mandrillapp.com',
+    address: "smtp.sparkpostmail.com",
+    port: 587,
+    enable_starttls_auto: true,
+    user_name: ENV["SPARKPOST_USERNAME"],
+    password: ENV["SPARKPOST_PASSWORD"],
+    #:authentication => 'AUTH LOGIN',
+    format: :html,
+    from: 'mail@motorcyclephilanthropy.com'
   }
 
 

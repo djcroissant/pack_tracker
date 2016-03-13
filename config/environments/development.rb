@@ -16,7 +16,22 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+
+## USE THIS FOR LOCALHOST MAIL SERVER
+#  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+
+  # Use SparkPost for outbound email
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sparkpostmail.com",
+    port: 587,
+    enable_starttls_auto: true,
+    user_name: ENV["SPARKPOST_USERNAME"],
+    password: ENV["SPARKPOST_PASSWORD"],
+    #:authentication => 'AUTH LOGIN',
+    format: :html,
+    from: 'mail@motorcyclephilanthropy.com'
+  }
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

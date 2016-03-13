@@ -12,7 +12,7 @@ describe ExpeditionMailer, :type => :mailer do
 
     it "renders the correct headers" do
 
-      expect(mail.from).to include "team@pack-tracker.herokuapp.com"
+      expect(mail.from).to include "mail@motorcyclephilanthropy.org"
       expect(mail.to).to include expedition.users.first.email
       expect(mail.subject).to include "Your PackTracker Packing List"
     end

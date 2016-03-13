@@ -19,16 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-## TEMPORARY SETUP TO TEST IN DEVELOPMENT
-set :environment, "development"
-every 1.minute do
+every 1.day, :at => '8 am' do
  rake "email:eight_day_reminder"
  rake "email:two_day_reminder"
 end
-
-
-## FINAL PRODUCTION:
-#every 1.day, :at => '8 am' do
-#  rake "email:eight_day_reminder"
-#  rake "email:two_day_reminder"
-#end

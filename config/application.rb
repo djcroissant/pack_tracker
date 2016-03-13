@@ -6,15 +6,18 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# Configure Mandrill
-if Rails.env == 'production'
-  MANDRILL = { MANDRILL_USERNAME: ENV['MANDRILL_USERNAME'],
-               MANDRILL_PASSWORD: ENV['MANDRILL_PASSWORD'] }
-else
-  MANDRILL = YAML.load(File.read(File.expand_path('../mandrill.yml', __FILE__)))
-  MANDRILL.merge! MANDRILL.fetch(Rails.env, {})
-  MANDRILL.symbolize_keys!
-end
+## THIS IS LEFTOVER FROM WOODY CLASS. NOT READY TO DELETE YET, BUT
+## WAS HAVING TROUBLE GETTING IT TO WORK. NOW I'M USING FIGARO AND
+## EVERYTHING IS HAPPY! DELETED sparkpost.yml ALREADY.
+# # Configure SparkPost
+# if Rails.env == 'production'
+#   SPARKPOST = { SPARKPOST_USERNAME: ENV['SPARKPOST_USERNAME'],
+#                SPARKPOST_PASSWORD: ENV['SPARKPOST_PASSWORD'] }
+# else
+#   SPARKPOST = YAML.load(File.read(File.expand_path('../sparkpost.yml', __FILE__)))
+#   SPARKPOST.merge! SPARKPOST.fetch(Rails.env, {})
+#   SPARKPOST.symbolize_keys!
+# end
 
 module PackTracker
   class Application < Rails::Application
